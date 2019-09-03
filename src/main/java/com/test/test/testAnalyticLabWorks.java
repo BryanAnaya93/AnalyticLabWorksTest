@@ -5,7 +5,6 @@
  */
 package com.test.test;
 
-import static java.lang.System.out;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -15,8 +14,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import jdk.nashorn.internal.ir.debug.JSONWriter;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  *
@@ -117,25 +116,16 @@ public class testAnalyticLabWorks {
     
     public String CountingDuplicates(String str){
         Map<String, Long> map = Arrays.asList(str.split("")).stream().collect(Collectors.groupingBy(c -> c.toLowerCase(), Collectors.counting()));
-        //List<String> tmp = map.entrySet().stream().filter(entry -> entry.getValue() > 1).map(entry -> entry.getKey()).collect(Collectors.toList());
         Map<String, String> fnl = map.entrySet().stream().filter(e -> e.getValue() > 1).collect(Collectors
                 .toMap(p->p.getKey(), p-> "'"+p.getKey()+"' ocurrs "+p.getValue()+" times "));
         //String s = fnl.entrySet().toString();
         
-        JSONObject jres = new JSONObject(fnl);
+        System.out.println(fnl.isEmpty() ? "0 # no characters repeats more than once" : fnl.size()+" # "+(fnl.values().toString().replaceAll("\\[|\\]","")));
         
-        System.out.println(jres);
-        /*System.out.print(map.size()==0 ? tmp.size()+" no characters repeats more than once " : tmp.size()+" # ");
-        tmp.forEach(x -> System.out.print("'"+x+"' "+" occurs "+map.get(x)+" times, "));
-        */
-        //String res = map.isEmpty() ? "0 # no characters repeats more than once " : map.size()+" # ";
+        String jres = JSONValue.toJSONString(fnl);
+        JSONObject jo = new JSONObject(fnl);
         
-        
-        
-        //prtEnd();
         return null;
-        
-        
     }
     
     
