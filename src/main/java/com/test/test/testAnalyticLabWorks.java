@@ -6,6 +6,7 @@
 package com.test.test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 
 /**
  *
@@ -113,22 +113,22 @@ public class testAnalyticLabWorks {
         }
     }
     
-    
-    public String CountingDuplicates(String str){
+    /*
+    public void CountingDuplicates(String str){
         Map<String, Long> map = Arrays.asList(str.split("")).stream().collect(Collectors.groupingBy(c -> c.toLowerCase(), Collectors.counting()));
-        Map<String, String> fnl = map.entrySet().stream().filter(e -> e.getValue() > 1).collect(Collectors
-                .toMap(p->p.getKey(), p-> "'"+p.getKey()+"' ocurrs "+p.getValue()+" times "));
-        //String s = fnl.entrySet().toString();
-        
-        System.out.println(fnl.isEmpty() ? "0 # no characters repeats more than once" : fnl.size()+" # "+(fnl.values().toString().replaceAll("\\[|\\]","")));
-        
-        String jres = JSONValue.toJSONString(fnl);
-        JSONObject jo = new JSONObject(fnl);
-        
-        return null;
-    }
+        Map<String, String> fnl = map.entrySet().stream().filter(e -> e.getValue() > 1).collect(Collectors.toMap(p->p.getKey(), p-> "'"+p.getKey()+"' ocurrs "+p.getValue()+" times "));
+        Map<Integer, String> res = new HashMap<>();
+        res.put(fnl.isEmpty()? 0 : fnl.size(), fnl.isEmpty()? "# no characters repeats more than once" : fnl.values().toString().replaceAll("\\[|\\]",""));
+        JSONObject jo = new JSONObject(res);
+        System.out.println(jo.toString());
+    }*/
     
-    
+   
+    /**
+     * Metodo auxiliar para validar si un elemento es nullo o esta vacio
+     * @param obj: object a validar.
+     * @return 
+     */
     public boolean isNullOrEmpty(Object obj){
         return obj != null && !obj.toString().trim().isEmpty();
     }
@@ -178,12 +178,12 @@ public class testAnalyticLabWorks {
         test.filterData(null);      // test option 3 (store)
         test.filterData("\\d+");    // test option 3 (store)
         
-        
+        /*
         test.CountingDuplicates("abcde");
         test.CountingDuplicates("aabBcde");
         test.CountingDuplicates("indivisibility");
         test.CountingDuplicates("aA11");
-        
+       */
     }    
 }
 
